@@ -9,13 +9,82 @@
         color-scheme: light dark;
       }
 
+      * {
+        box-sizing: border-box;
+      }
+
       body {
         margin: 0;
         min-height: 100vh;
-        display: grid;
-        place-items: center;
         font-family: Arial, sans-serif;
         background: linear-gradient(135deg, #eef2ff, #dbeafe);
+      }
+
+      .header {
+        position: fixed;
+        inset: 1rem 1rem auto;
+        display: flex;
+        justify-content: flex-end;
+        z-index: 10;
+      }
+
+      .menu-button {
+        width: 3rem;
+        height: 3rem;
+        border: none;
+        border-radius: 0.75rem;
+        background: #1e3a8a;
+        color: #fff;
+        cursor: pointer;
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.25rem;
+        padding: 0.65rem;
+      }
+
+      .menu-button span {
+        display: block;
+        width: 100%;
+        height: 0.2rem;
+        background: currentColor;
+        border-radius: 1rem;
+      }
+
+      .menu {
+        position: fixed;
+        top: 4.75rem;
+        right: 1rem;
+        min-width: 10rem;
+        background: rgba(30, 58, 138, 0.95);
+        border-radius: 0.75rem;
+        padding: 0.5rem;
+        list-style: none;
+        margin: 0;
+        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.25);
+      }
+
+      .menu[hidden] {
+        display: none;
+      }
+
+      .menu a {
+        display: block;
+        color: #fff;
+        text-decoration: none;
+        padding: 0.65rem 0.75rem;
+        border-radius: 0.5rem;
+      }
+
+      .menu a:hover,
+      .menu a:focus-visible {
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      main {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
       }
 
       h1 {
@@ -27,6 +96,32 @@
     </style>
   </head>
   <body>
-    <h1>Hello, World!</h1>
+    <header class="header">
+      <button class="menu-button" id="menuButton" aria-expanded="false" aria-controls="mainMenu" aria-label="Open navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="menu" id="mainMenu" hidden>
+        <li><a href="#">Главная</a></li>
+        <li><a href="#">О нас</a></li>
+        <li><a href="#">Контакты</a></li>
+      </ul>
+    </header>
+
+    <main>
+      <h1>Hello, World!</h1>
+    </main>
+
+    <script>
+      const button = document.getElementById('menuButton');
+      const menu = document.getElementById('mainMenu');
+
+      button.addEventListener('click', () => {
+        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+        button.setAttribute('aria-expanded', String(!isExpanded));
+        menu.hidden = isExpanded;
+      });
+    </script>
   </body>
 </html>
