@@ -24,8 +24,42 @@
         position: fixed;
         inset: 1rem 1rem auto;
         display: flex;
-        justify-content: flex-end;
+        align-items: flex-start;
+        gap: 0.75rem;
         z-index: 10;
+      }
+
+      .search-form {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem;
+        border-radius: 0.75rem;
+        background: rgba(255, 255, 255, 0.85);
+        box-shadow: 0 8px 20px rgba(15, 23, 42, 0.15);
+      }
+
+      .search-input {
+        width: min(50vw, 16rem);
+        border: 1px solid #93c5fd;
+        border-radius: 0.5rem;
+        padding: 0.55rem 0.7rem;
+        font-size: 0.95rem;
+      }
+
+      .search-button {
+        border: none;
+        border-radius: 0.5rem;
+        background: #2563eb;
+        color: #fff;
+        padding: 0.55rem 0.9rem;
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+
+      .search-button:hover,
+      .search-button:focus-visible {
+        background: #1d4ed8;
       }
 
       .menu-button {
@@ -49,6 +83,10 @@
         height: 0.2rem;
         background: currentColor;
         border-radius: 1rem;
+      }
+
+      .menu-wrapper {
+        position: relative;
       }
 
       .menu {
@@ -81,6 +119,13 @@
         background: rgba(255, 255, 255, 0.15);
       }
 
+      .search-result {
+        margin: 0;
+        font-size: 1.15rem;
+        color: #1e3a8a;
+        text-align: center;
+      }
+
       main {
         min-height: 100vh;
         display: grid;
@@ -97,30 +142,62 @@
   </head>
   <body>
     <header class="header">
-      <button class="menu-button" id="menuButton" aria-expanded="false" aria-controls="mainMenu" aria-label="Open navigation menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <ul class="menu" id="mainMenu" hidden>
-        <li><a href="#">Главная</a></li>
-        <li><a href="#">О нас</a></li>
-        <li><a href="#">Контакты</a></li>
-      </ul>
+      <form class="search-form" id="searchForm" role="search" aria-label="Поиск по странице">
+        <input
+          class="search-input"
+          id="searchInput"
+          type="search"
+          placeholder="Введите запрос"
+          autocomplete="off"
+        />
+        <button class="search-button" type="submit">Найти</button>
+      </form>
+      <div class="menu-wrapper">
+        <button class="menu-button" id="menuButton" aria-expanded="false" aria-controls="mainMenu" aria-label="Open navigation menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="menu" id="mainMenu" hidden>
+          <li><a href="#">Главная</a></li>
+          <li><a href="#">О нас</a></li>
+          <li><a href="#">Контакты</a></li>
+        </ul>
+      </div>
     </header>
 
     <main>
-      <h1>Hello, World!</h1>
+      <div>
+        <h1>Hello, World!</h1>
+        <p class="search-result" id="searchResult" hidden></p>
+      </div>
     </main>
 
     <script>
       const button = document.getElementById('menuButton');
       const menu = document.getElementById('mainMenu');
+      const searchForm = document.getElementById('searchForm');
+      const searchInput = document.getElementById('searchInput');
+      const searchResult = document.getElementById('searchResult');
 
       button.addEventListener('click', () => {
         const isExpanded = button.getAttribute('aria-expanded') === 'true';
         button.setAttribute('aria-expanded', String(!isExpanded));
         menu.hidden = isExpanded;
+      });
+
+      searchForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const query = searchInput.value.trim();
+
+        if (!query) {
+          searchResult.hidden = false;
+          searchResult.textContent = 'Введите запрос для поиска.';
+          return;
+        }
+
+        searchResult.hidden = false;
+        searchResult.textContent = `Результат поиска: «${query}»`;
       });
     </script>
   </body>
