@@ -42,8 +42,42 @@
         position: fixed;
         inset: 1rem 1rem auto;
         display: flex;
-        justify-content: flex-end;
+        align-items: flex-start;
+        gap: 0.75rem;
         z-index: 10;
+      }
+
+      .search-form {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem;
+        border-radius: 0.75rem;
+        background: rgba(255, 255, 255, 0.85);
+        box-shadow: 0 8px 20px rgba(15, 23, 42, 0.15);
+      }
+
+      .search-input {
+        width: min(50vw, 16rem);
+        border: 1px solid #93c5fd;
+        border-radius: 0.5rem;
+        padding: 0.55rem 0.7rem;
+        font-size: 0.95rem;
+      }
+
+      .search-button {
+        border: none;
+        border-radius: 0.5rem;
+        background: #2563eb;
+        color: #fff;
+        padding: 0.55rem 0.9rem;
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+
+      .search-button:hover,
+      .search-button:focus-visible {
+        background: #1d4ed8;
       }
 
       .menu-button {
@@ -67,6 +101,10 @@
         width: 100%;
         height: 0.18rem;
         background: currentColor;
+      }
+
+      .menu-wrapper {
+        position: relative;
       }
 
       .menu {
@@ -99,6 +137,13 @@
       .menu a:focus-visible {
         background: rgba(212, 175, 55, 0.15);
         color: #f8ebc6;
+      }
+
+      .search-result {
+        margin: 0;
+        font-size: 1.15rem;
+        color: #1e3a8a;
+        text-align: center;
       }
 
       main {
@@ -189,11 +234,28 @@
     <script>
       const button = document.getElementById('menuButton');
       const menu = document.getElementById('mainMenu');
+      const searchForm = document.getElementById('searchForm');
+      const searchInput = document.getElementById('searchInput');
+      const searchResult = document.getElementById('searchResult');
 
       button.addEventListener('click', () => {
         const isExpanded = button.getAttribute('aria-expanded') === 'true';
         button.setAttribute('aria-expanded', String(!isExpanded));
         menu.hidden = isExpanded;
+      });
+
+      searchForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const query = searchInput.value.trim();
+
+        if (!query) {
+          searchResult.hidden = false;
+          searchResult.textContent = 'Введите запрос для поиска.';
+          return;
+        }
+
+        searchResult.hidden = false;
+        searchResult.textContent = `Результат поиска: «${query}»`;
       });
     </script>
   </body>
