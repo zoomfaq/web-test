@@ -219,155 +219,14 @@
         animation: sealPulse 3s ease-in-out infinite;
       }
 
-      .duel-scene {
+      .battle-gif {
         position: fixed;
         right: 1rem;
         bottom: 1rem;
         width: min(34vw, 340px);
-        aspect-ratio: 16 / 10;
+        max-height: 34vh;
         border: 1px solid rgba(212, 175, 55, 0.45);
-        background: linear-gradient(180deg, rgba(9, 10, 15, 0.65), rgba(9, 10, 15, 0.95));
-        overflow: hidden;
         box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
-      }
-
-      .duel-ground {
-        position: absolute;
-        inset: auto 0 0;
-        height: 22%;
-        background: linear-gradient(0deg, rgba(39, 39, 48, 0.75), rgba(39, 39, 48, 0.2));
-      }
-
-      .fighter {
-        position: absolute;
-        bottom: 14%;
-        width: 28%;
-        height: 64%;
-      }
-
-      .fighter .body {
-        position: absolute;
-        inset: 20% 18% 10%;
-        border-radius: 8px;
-      }
-
-      .fighter .helmet {
-        position: absolute;
-        top: 8%;
-        left: 26%;
-        width: 48%;
-        height: 20%;
-        border-radius: 40% 40% 35% 35%;
-      }
-
-      .fighter .arm {
-        position: absolute;
-        top: 34%;
-        width: 44%;
-        height: 12%;
-        border-radius: 999px;
-      }
-
-      .fighter .leg {
-        position: absolute;
-        bottom: 0;
-        width: 33%;
-        height: 24%;
-        border-radius: 5px;
-      }
-
-      .fighter .leg.left {
-        left: 23%;
-      }
-
-      .fighter .leg.right {
-        right: 23%;
-      }
-
-      .fighter .chainsword {
-        position: absolute;
-        top: 40%;
-        width: 56%;
-        height: 10%;
-        border-radius: 999px;
-      }
-
-      .fighter.loyalist {
-        left: 8%;
-        animation: loyalistAdvance 1s ease-in-out infinite;
-      }
-
-      .fighter.loyalist .body,
-      .fighter.loyalist .helmet,
-      .fighter.loyalist .arm,
-      .fighter.loyalist .leg {
-        background: linear-gradient(145deg, #3b77d1, #18315e);
-        border: 1px solid #9bc3ff;
-      }
-
-      .fighter.loyalist .arm {
-        right: -10%;
-        transform-origin: right center;
-        transform: rotate(-12deg);
-      }
-
-      .fighter.loyalist .chainsword {
-        right: -40%;
-        background: linear-gradient(90deg, #94a3b8, #d1d5db);
-        transform-origin: left center;
-        transform: rotate(-8deg);
-      }
-
-      .fighter.chaos {
-        right: 8%;
-        animation: chaosAdvance 1s ease-in-out infinite;
-      }
-
-      .fighter.chaos .body,
-      .fighter.chaos .helmet,
-      .fighter.chaos .arm,
-      .fighter.chaos .leg {
-        background: linear-gradient(145deg, #9d2020, #3f0f0f);
-        border: 1px solid #f88;
-      }
-
-      .fighter.chaos .arm {
-        left: -10%;
-        transform-origin: left center;
-        transform: rotate(12deg);
-      }
-
-      .fighter.chaos .chainsword {
-        left: -40%;
-        background: linear-gradient(270deg, #a8a29e, #e7e5e4);
-        transform-origin: right center;
-        transform: rotate(8deg);
-      }
-
-      .clash-point {
-        position: absolute;
-        left: 50%;
-        top: 52%;
-        width: 18px;
-        height: 18px;
-        border-radius: 50%;
-        transform: translate(-50%, -50%);
-        background: radial-gradient(circle, rgba(250, 245, 165, 0.95), rgba(250, 186, 67, 0));
-        animation: sparkPulse 0.35s steps(2) infinite;
-      }
-
-      .clash-point::before,
-      .clash-point::after {
-        content: "";
-        position: absolute;
-        inset: -14px;
-        border-radius: 50%;
-        border: 1px solid rgba(255, 215, 128, 0.5);
-        animation: sparkRing 0.8s ease-out infinite;
-      }
-
-      .clash-point::after {
-        animation-delay: 0.25s;
       }
 
       @keyframes ambientShift {
@@ -429,48 +288,6 @@
         }
       }
 
-      @keyframes loyalistAdvance {
-        0%,
-        100% {
-          transform: translateX(0);
-        }
-        50% {
-          transform: translateX(8px);
-        }
-      }
-
-      @keyframes chaosAdvance {
-        0%,
-        100% {
-          transform: translateX(0);
-        }
-        50% {
-          transform: translateX(-8px);
-        }
-      }
-
-      @keyframes sparkPulse {
-        0%,
-        100% {
-          transform: translate(-50%, -50%) scale(0.85);
-          opacity: 0.75;
-        }
-        50% {
-          transform: translate(-50%, -50%) scale(1.25);
-          opacity: 1;
-        }
-      }
-
-      @keyframes sparkRing {
-        from {
-          transform: scale(0.35);
-          opacity: 0.65;
-        }
-        to {
-          transform: scale(1.25);
-          opacity: 0;
-        }
-      }
 
       @media (prefers-reduced-motion: reduce) {
         *,
@@ -508,26 +325,7 @@
       </section>
     </main>
 
-    <aside class="duel-scene" aria-label="2D дуэль Space Marine и Space Marine Chaos на цепных мечах">
-      <div class="fighter loyalist" aria-hidden="true">
-        <div class="helmet"></div>
-        <div class="body"></div>
-        <div class="arm"></div>
-        <div class="chainsword"></div>
-        <div class="leg left"></div>
-        <div class="leg right"></div>
-      </div>
-      <div class="fighter chaos" aria-hidden="true">
-        <div class="helmet"></div>
-        <div class="body"></div>
-        <div class="arm"></div>
-        <div class="chainsword"></div>
-        <div class="leg left"></div>
-        <div class="leg right"></div>
-      </div>
-      <div class="clash-point" aria-hidden="true"></div>
-      <div class="duel-ground" aria-hidden="true"></div>
-    </aside>
+    <img class="battle-gif" src="chaplain-shootas-blood-teef.gif" alt="Chaplain с шутами и blood teef" />
 
     <script>
       const button = document.getElementById('menuButton');
